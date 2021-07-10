@@ -1,0 +1,56 @@
+WindowManager:
+    InitialScreen:
+    SubnetInput:
+    SSHInput:
+<InitialScreen>:
+    name: "Hello there!"
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.6, 0.7
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Image:
+            source: './images/filler.png'
+        Label:
+            text: "Hello there! what are we here to test?"
+            font_size: 25
+        GridLayout:
+            cols: 2
+            Button:
+                text: "SSH TEST"
+                font_size: 28
+                on_release: 
+                    app.root.current = "SSH Input"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "PING SCAN"
+                font_size: 28
+                on_release:
+                    app.root.current = "Subnet Input"
+<SubnetInput>:
+    name: "Subnet Input"
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.6, 0.7
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Label:
+            text: "Scan!"
+            font_size: 25
+
+<ScanOutput>:
+    name: "Scan Output"
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.6, 0.7
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Label:
+            text: "end"
+            font_size: 25     
+<SSHInput>:
+    name: "SSH Input"
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.6, 0.7
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Label:
+            text: "Time to Test Your SSH config!"
+            font_size: 25
