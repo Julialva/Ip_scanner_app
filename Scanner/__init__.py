@@ -16,9 +16,7 @@ class SSHOutput(Screen):
 class WindowManager(ScreenManager):
     pass
     
-kv=Builder.load_file("Design.kv")
+kv=Builder.load_file("./Scanner/design/Design.kv")
 class IpScanner(App):
     def build(self):
         return kv
-if __name__ == "__main__":
-    IpScanner().run()
