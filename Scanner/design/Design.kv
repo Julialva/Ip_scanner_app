@@ -2,8 +2,10 @@ WindowManager:
     InitialScreen:
     SubnetInput:
     SSHInput:
+    ScanOutput:
+    SSHOutput:
 <InitialScreen>:
-    name: "Hello there!"
+    name: "Home"
     BoxLayout:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
@@ -35,7 +37,11 @@ WindowManager:
         Label:
             text: "Scan!"
             font_size: 25
-
+        TextInput:
+        Button:
+            text: "PING SCAN"
+            font_size: 28
+            on_release: app.root.current = "Scan Output"
 <ScanOutput>:
     name: "Scan Output"
     BoxLayout:
@@ -54,3 +60,16 @@ WindowManager:
         Label:
             text: "Time to Test Your SSH config!"
             font_size: 25
+        TextInput:
+        Button:
+            text: "SSHTest"
+            font_size: 28
+<SSHOutput>:
+    name: "SSH Output"
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.6, 0.7
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Label:
+            text: "end"
+            font_size: 25     
