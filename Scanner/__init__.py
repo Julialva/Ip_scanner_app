@@ -1,18 +1,47 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.core.window import Window
 
 class InitialScreen(Screen):
     pass
 class SubnetInput(Screen):
-    pass
+    def on_pre_enter(self):
+        Window.bind(on_keyboard=self.back)
+    def back(self,window,key,*args):
+        if key == 27: #esc key
+            App.get_running_app().root.current = 'Home'
+            return True
+    def on_pre_leave(self, *args):
+        Window.unbind(on_keyboard=self.back)
 class ScanOutput(Screen):
-    pass
+    def on_pre_enter(self):
+        Window.bind(on_keyboard=self.back)
+    def back(self,window,key,*args):
+        if key == 27: #esc key
+            App.get_running_app().root.current = 'Home'
+            return True
+    def on_pre_leave(self, *args):
+        Window.unbind(on_keyboard=self.back)
 class SSHInput(Screen):
-    pass
+    def on_pre_enter(self):
+        Window.bind(on_keyboard=self.back)
+    def back(self,window,key,*args):
+        if key == 27: #esc key
+            App.get_running_app().root.current = 'Home'
+            return True
+    def on_pre_leave(self, *args):
+        Window.unbind(on_keyboard=self.back)
 class SSHOutput(Screen):
-    pass
+    def on_pre_enter(self):
+        Window.bind(on_keyboard=self.back)
+    def back(self,window,key,*args):
+        if key == 27: #esc key
+            App.get_running_app().root.current = 'Home'
+            App.transition= "Right"
+            return True
+    def on_pre_leave(self, *args):
+        Window.unbind(on_keyboard=self.back)
 class WindowManager(ScreenManager):
     pass
     

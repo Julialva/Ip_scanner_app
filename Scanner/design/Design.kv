@@ -4,6 +4,16 @@ WindowManager:
     SSHInput:
     ScanOutput:
     SSHOutput:
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (34/255, 139/255, 34/255,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
 <InitialScreen>:
     name: "Home"
     BoxLayout:
@@ -15,15 +25,17 @@ WindowManager:
         Label:
             text: "Hello there! what are we here to test?"
             font_size: 25
-        GridLayout:
-            cols: 2
-            Button:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: "10dp"
+            spacing: "20dp"
+            RoundedButton:
                 text: "SSH TEST"
                 font_size: 28
                 on_release: 
                     app.root.current = "SSH Input"
                     root.manager.transition.direction = "left"
-            Button:
+            RoundedButton:
                 text: "PING SCAN"
                 font_size: 28
                 on_release:
@@ -31,6 +43,8 @@ WindowManager:
 <SubnetInput>:
     name: "Subnet Input"
     BoxLayout:
+        padding: "10dp"
+        spacing: "20dp"
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
@@ -38,7 +52,10 @@ WindowManager:
             text: "Scan!"
             font_size: 25
         TextInput:
-        Button:
+            hint_text: 'IP Address; eg. 10.0.0.0'
+        TextInput:
+            hint_text: 'Subnet Mask; eg. 255.255.255.0'
+        RoundedButton:
             text: "PING SCAN"
             font_size: 28
             on_release: app.root.current = "Scan Output"
@@ -54,6 +71,8 @@ WindowManager:
 <SSHInput>:
     name: "SSH Input"
     BoxLayout:
+        padding: "10dp"
+        spacing: "20dp"
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
@@ -61,9 +80,11 @@ WindowManager:
             text: "Time to Test Your SSH config!"
             font_size: 25
         TextInput:
-        Button:
+            hint_text: 'IP Address; eg. 192.168.100.1'
+        RoundedButton:
             text: "SSHTest"
             font_size: 28
+            on_release: app.root.current = "SSH Output"
 <SSHOutput>:
     name: "SSH Output"
     BoxLayout:
