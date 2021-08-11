@@ -6,6 +6,9 @@ from kivy.core.window import Window
 class InitialScreen(Screen):
     pass
 class SubnetInput(Screen):
+    def clear_inputs(self, text_inputs):
+        for text_input in text_inputs:
+            text_input.text = ""
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.back)
     def back(self,window,key,*args):
@@ -24,6 +27,9 @@ class ScanOutput(Screen):
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.back)
 class SSHInput(Screen):
+    def clear_inputs(self, text_inputs):
+        for text_input in text_inputs:
+            text_input.text = ""
     def on_pre_enter(self):
         Window.bind(on_keyboard=self.back)
     def back(self,window,key,*args):

@@ -52,13 +52,17 @@ WindowManager:
             text: "Scan!"
             font_size: 25
         TextInput:
+            id: IpYielded
             hint_text: 'IP Address; eg. 10.0.0.0'
         TextInput:
+            id: SubnetYielded
             hint_text: 'Subnet Mask; eg. 255.255.255.0'
         RoundedButton:
             text: "PING SCAN"
             font_size: 28
-            on_release: app.root.current = "Scan Output"
+            on_release: 
+                app.root.current = "Scan Output"
+                root.clear_inputs([IpYielded, SubnetYielded])
 <ScanOutput>:
     name: "Scan Output"
     BoxLayout:
@@ -80,11 +84,14 @@ WindowManager:
             text: "Time to Test Your SSH config!"
             font_size: 25
         TextInput:
-            hint_text: 'IP Address; eg. 192.168.100.1'
+            id: SshIpYielded
+            hint_text: "IP Address; eg. 192.168.100.1"
         RoundedButton:
             text: "SSHTest"
             font_size: 28
-            on_release: app.root.current = "SSH Output"
+            on_release: 
+                app.root.current = "SSH Output"
+                root.clear_inputs([SshIpYielded])
 <SSHOutput>:
     name: "SSH Output"
     BoxLayout:
