@@ -62,6 +62,7 @@ WindowManager:
             font_size: 28
             on_release: 
                 app.root.current = "Scan Output"
+                root.get_input([IpYielded, SubnetYielded])
                 root.clear_inputs([IpYielded, SubnetYielded])
 <ScanOutput>:
     name: "Scan Output"
@@ -91,6 +92,7 @@ WindowManager:
             font_size: 28
             on_release: 
                 app.root.current = "SSH Output"
+                root.get_input(SshIpYielded)
                 root.clear_inputs([SshIpYielded])
 <SSHOutput>:
     name: "SSH Output"
@@ -99,5 +101,6 @@ WindowManager:
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         Label:
-            text: "end"
+            id: SSHresult
+            text: root.ssh_test()
             font_size: 25     
