@@ -96,11 +96,12 @@ WindowManager:
                 root.clear_inputs([SshIpYielded])
 <SSHOutput>:
     name: "SSH Output"
+    on_enter: root.ssh_test()
     BoxLayout:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         Label:
             id: SSHresult
-            text: root.ssh_test()
-            font_size: 25     
+            text: "please wait.."
+            font_size: 25  

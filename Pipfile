@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 kivy = {extras = ["base"], version = "*"}
+black = "*"
 
 [dev-packages]
 

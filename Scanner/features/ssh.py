@@ -1,5 +1,7 @@
 import socket
-def socket_test(ip,port):
+
+
+def socket_test(ip, port):
     some_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     location = (ip, port)
@@ -8,7 +10,9 @@ def socket_test(ip,port):
     if result_of_check == 0:
         some_socket.shutdown(socket.SHUT_RDWR)
         some_socket.close()
-        return 1 #port open
+        return "Connection to " + str(ip) + " was successful..."  # port open
     else:
-        return 0 #port closed
+        return "Connection to " + str(ip) + " failed..."  # port closed
+
+
 # print(socket_test("192.168.0.22",22)) should print 0 on home lan
