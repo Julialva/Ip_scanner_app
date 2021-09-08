@@ -5,9 +5,16 @@ name = "pypi"
 
 [packages]
 kivy = {extras = ["base"], version = "*"}
-black = "*"
+scapy = "*"
+argparse = "*"
+pandas = "*"
+pdfkivygui = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true

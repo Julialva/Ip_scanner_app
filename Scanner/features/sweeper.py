@@ -1,5 +1,6 @@
 import socket
 
+import pandas as pd
 import scapy.all as scapy
 
 
@@ -9,8 +10,8 @@ class sweeper:
 
     def run(self):
         sweep_result = self.__scan(self.net_ip)
-        sweep_result_final = self.__find_hostnames()
-        return sweep_result_final
+        sweep_result_final = self.__find_hostnames(sweep_result)
+        return pd.DataFrame(sweep_result_final)
 
     def __scan(self, ip):
         arp_req_frame = scapy.ARP(pdst=ip)

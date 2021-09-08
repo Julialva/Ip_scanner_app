@@ -1,9 +1,12 @@
+from datetime import date
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from Scanner.features.ssh import socket_test
+from Scanner.features.sweeper import sweeper
 
 
 class InitialScreen(Screen):
@@ -13,7 +16,6 @@ class InitialScreen(Screen):
 class SubnetInput(Screen):
     def get_input(self, text_inputs):
         App.get_running_app().MY_SUBNET = text_inputs[0].text
-        App.get_running_app().MY_MASK = text_inputs[1].text
         # print(App.get_running_app().MY_SUBNET,App.get_running_app().MY_MASK)
         return
 
@@ -49,6 +51,10 @@ class ScanOutput(Screen):
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.back)
         return
+
+    def on_enter(self, *args):
+        App.get_running_app().DF = sweeper(App.get_running_app().MY_SUBNET).run()
+        self.ids.SweepResult.text = str(App.get_running_app().DF)
 
 
 class SSHInput(Screen):
@@ -107,7 +113,7 @@ kv = Builder.load_file("./Scanner/design/Design.kv")
 class IpScanner(App):
     MY_IP = ""
     MY_SUBNET = ""
-    MY_MASK = ""
+    DF = None
 
     def build(self):
         return kv

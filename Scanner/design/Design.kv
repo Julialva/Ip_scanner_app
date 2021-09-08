@@ -53,17 +53,14 @@ WindowManager:
             font_size: 25
         TextInput:
             id: IpYielded
-            hint_text: 'IP Address; eg. 10.0.0.0'
-        TextInput:
-            id: SubnetYielded
-            hint_text: 'Subnet Mask; eg. 255.255.255.0'
+            hint_text: 'Network Address; eg. 10.0.0.0/24'
         RoundedButton:
             text: "PING SCAN"
             font_size: 28
             on_release: 
                 app.root.current = "Scan Output"
-                root.get_input([IpYielded, SubnetYielded])
-                root.clear_inputs([IpYielded, SubnetYielded])
+                root.get_input([IpYielded])
+                root.clear_inputs([IpYielded])
 <ScanOutput>:
     name: "Scan Output"
     BoxLayout:
@@ -71,8 +68,9 @@ WindowManager:
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         Label:
-            text: "end"
-            font_size: 25     
+            id: SweepResult
+            text: ""
+            font_size: 25
 <SSHInput>:
     name: "SSH Input"
     BoxLayout:
@@ -103,5 +101,5 @@ WindowManager:
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         Label:
             id: SSHresult
-            text: "please wait.."
+            text: "please wait..."
             font_size: 25  
