@@ -8,7 +8,7 @@ kivy = {extras = ["base"], version = "*"}
 scapy = "*"
 argparse = "*"
 pandas = "*"
-pdfkivygui = "*"
+kivymd = "*"
 
 [dev-packages]
 black = "*"

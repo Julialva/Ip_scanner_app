@@ -1,12 +1,15 @@
 from datetime import date
 
-from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.metrics import dp
 from kivy.uix.screenmanager import Screen, ScreenManager
+from kivymd.app import MDApp
+from kivymd.uix.datatables import MDDataTable
 
 from Scanner.features.ssh import socket_test
 from Scanner.features.sweeper import sweeper
+from Scanner.features.utility import format_df, list_in_caps
 
 
 class InitialScreen(Screen):
@@ -15,7 +18,7 @@ class InitialScreen(Screen):
 
 class SubnetInput(Screen):
     def get_input(self, text_inputs):
-        App.get_running_app().MY_SUBNET = text_inputs[0].text
+        MDApp.get_running_app().MY_SUBNET = text_inputs[0].text
         # print(App.get_running_app().MY_SUBNET,App.get_running_app().MY_MASK)
         return
 
@@ -30,7 +33,7 @@ class SubnetInput(Screen):
 
     def back(self, window, key, *args):
         if key == 27:  # esc key
-            App.get_running_app().root.current = "Home"
+            MDApp.get_running_app().root.current = "Home"
             return True
 
     def on_pre_leave(self, *args):
@@ -45,7 +48,7 @@ class ScanOutput(Screen):
 
     def back(self, window, key, *args):
         if key == 27:  # esc key
-            App.get_running_app().root.current = "Home"
+            MDApp.get_running_app().root.current = "Home"
             return True
 
     def on_pre_leave(self, *args):
@@ -53,13 +56,21 @@ class ScanOutput(Screen):
         return
 
     def on_enter(self, *args):
-        App.get_running_app().DF = sweeper(App.get_running_app().MY_SUBNET).run()
-        self.ids.SweepResult.text = str(App.get_running_app().DF)
+        MDApp.get_running_app().DF = sweeper(MDApp.get_running_app().MY_SUBNET).run()
+        columns_data, rows_data = format_df(MDApp.get_running_app().DF)
+        columns_data = list_in_caps(columns_data)
+        columns_data = [(x, dp(60)) for x in columns_data]
+        table = MDDataTable(
+            column_data=columns_data,
+            row_data=rows_data,
+            use_pagination=True,
+        )
+        self.add_widget(table)
 
 
 class SSHInput(Screen):
     def get_input(self, text_input):
-        App.get_running_app().MY_IP = text_input.text
+        MDApp.get_running_app().MY_IP = text_input.text
         return
 
     def clear_inputs(self, text_inputs):
@@ -73,7 +84,7 @@ class SSHInput(Screen):
 
     def back(self, window, key, *args):
         if key == 27:  # esc key
-            App.get_running_app().root.current = "Home"
+            MDApp.get_running_app().root.current = "Home"
             return True
 
     def on_pre_leave(self, *args):
@@ -88,13 +99,13 @@ class SSHOutput(Screen):
 
     def back(self, window, key, *args):
         if key == 27:  # esc key
-            App.get_running_app().root.current = "Home"
-            App.transition = "Right"
+            MDApp.get_running_app().root.current = "Home"
+            MDApp.transition = "Right"
             return True
 
     def ssh_test(self):
-        self.ids.SSHresult.text = App.get_running_app().SSH_STATUS = socket_test(
-            App.get_running_app().MY_IP, port=22
+        self.ids.SSHresult.text = MDApp.get_running_app().SSH_STATUS = socket_test(
+            MDApp.get_running_app().MY_IP, port=22
         )
         return
 
@@ -107,13 +118,14 @@ class WindowManager(ScreenManager):
     pass
 
 
-kv = Builder.load_file("./Scanner/design/Design.kv")
-
-
-class IpScanner(App):
+class IpScanner(MDApp):
     MY_IP = ""
     MY_SUBNET = ""
     DF = None
 
     def build(self):
+        kv = Builder.load_file("./Scanner/design/Design.kv")
+        self.theme_cls.theme_style = "Light"
+        self.theme_cls.primary_palette = "Amber"
+        self.theme_cls.primary_hue = "700"
         return kv

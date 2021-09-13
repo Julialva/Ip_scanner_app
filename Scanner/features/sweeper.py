@@ -38,4 +38,10 @@ class sweeper:
                 item["hostname"] = socket.gethostbyaddr(item["ip"])
             except:
                 item["hostname"] = None
+            else:
+                if hasattr(item["hostname"], "__iter__"):
+                    item["hostname"] = item["hostname"][0]
         return sweep_result
+
+
+# print(sweeper("192.168.0.0/24").run())

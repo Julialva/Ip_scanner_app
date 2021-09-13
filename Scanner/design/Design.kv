@@ -4,98 +4,142 @@ WindowManager:
     SSHInput:
     ScanOutput:
     SSHOutput:
-<RoundedButton@Button>
-    background_color: (0,0,0,0)
-    background_normal: ''
-    canvas.before:
-        Color:
-            rgba: (34/255, 139/255, 34/255,1)
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [18]
 <InitialScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './Scanner/images/trator.jpg'
     name: "Home"
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         Image:
-            source: './Scanner/images/filler.png'
+            source: './Scanner/images/potato.png'
+            allow_stretch: True
+            keep_ratio: True
         Label:
-            text: "Hello there! what are we here to test?"
-            font_size: 25
-        BoxLayout:
+            text: "Welcome to IP potato!"
+            font_size: 20
+        MDBoxLayout:
             orientation: 'vertical'
             padding: "10dp"
             spacing: "20dp"
-            RoundedButton:
+            MDRaisedButton:
+                pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
                 text: "SSH TEST"
-                font_size: 28
+                font_size: 23
+                size_hint_x: 0.6
                 on_release: 
                     app.root.current = "SSH Input"
                     root.manager.transition.direction = "left"
-            RoundedButton:
+            MDRaisedButton:
+                pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
                 text: "PING SCAN"
-                font_size: 28
+                font_size: 23
+                size_hint_x: 0.6
                 on_release:
                     app.root.current = "Subnet Input"
 <SubnetInput>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './Scanner/images/cooltrator.jpg'
     name: "Subnet Input"
-    BoxLayout:
+    MDBoxLayout:
+        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
         padding: "10dp"
         spacing: "20dp"
         orientation: 'vertical'
         size_hint: 0.6, 0.7
-        pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Image:
+            source: './Scanner/images/best_tato.png'
+            allow_stretch: True
+            keep_ratio: True
         Label:
-            text: "Scan!"
-            font_size: 25
-        TextInput:
+            text: "What's your network address?"
+            font_size: 23
+        MDTextField:
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
             id: IpYielded
-            hint_text: 'Network Address; eg. 10.0.0.0/24'
-        RoundedButton:
-            text: "PING SCAN"
-            font_size: 28
+            hint_text: 'Network Address; eg. 192.168.0.0/24'
+            mode: "fill"
+            required: True
+            size_hint_x: 0.7
+            color_mode: 'custom'
+            line_color_normal: 1,1,1,1
+            line_color_focus: 1,1,1,1
+        MDRaisedButton:
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+            text: "Sweep"
+            font_size: 20
+            size_hint_x: 0.6
             on_release: 
                 app.root.current = "Scan Output"
                 root.get_input([IpYielded])
                 root.clear_inputs([IpYielded])
 <ScanOutput>:
     name: "Scan Output"
-    BoxLayout:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './Scanner/images/cooltrator.jpg'
+    MDBoxLayout:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
-        Label:
-            id: SweepResult
-            text: ""
-            font_size: 25
+        
 <SSHInput>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './Scanner/images/cooltrator.jpg'
     name: "SSH Input"
-    BoxLayout:
+    MDBoxLayout:
         padding: "10dp"
         spacing: "20dp"
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+        Image:
+            source: './Scanner/images/potato_dancing.png'
+            allow_stretch: True
+            keep_ratio: True
         Label:
-            text: "Time to Test Your SSH config!"
-            font_size: 25
-        TextInput:
+            text: "What's your address?"
+            font_size: 23
+        MDTextField:
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
             id: SshIpYielded
             hint_text: "IP Address; eg. 192.168.100.1"
-        RoundedButton:
+            mode: "fill"
+            required: True
+            size_hint_x: 0.7
+            color_mode: 'custom'
+            line_color_normal: 1,1,1,1
+            line_color_focus: 1,1,1,1
+        MDRaisedButton:
+            pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
+            size_hint_x: 0.6
             text: "SSHTest"
-            font_size: 28
+            font_size: 22
             on_release: 
                 app.root.current = "SSH Output"
                 root.get_input(SshIpYielded)
                 root.clear_inputs([SshIpYielded])
 <SSHOutput>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: './Scanner/images/cooltrator.jpg'
     name: "SSH Output"
     on_enter: root.ssh_test()
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
