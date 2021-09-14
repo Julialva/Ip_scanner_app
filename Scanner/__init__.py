@@ -1,4 +1,5 @@
 from datetime import date
+from time import sleep
 
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -65,6 +66,7 @@ class ScanOutput(Screen):
             row_data=rows_data,
             use_pagination=True,
         )
+        MDApp.get_running_app().AUX = False
         self.add_widget(table)
 
 
@@ -122,6 +124,7 @@ class IpScanner(MDApp):
     MY_IP = ""
     MY_SUBNET = ""
     DF = None
+    AUX = True
 
     def build(self):
         kv = Builder.load_file("./Scanner/design/Design.kv")
