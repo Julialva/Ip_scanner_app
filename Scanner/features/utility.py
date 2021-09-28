@@ -1,4 +1,16 @@
+import socket
+
 import pandas as pd
+
+
+def is_ip(addr):
+    try:
+        socket.inet_aton(addr)
+    # legal
+    except socket.error:
+        return False
+
+    return True
 
 
 def format_df(df):

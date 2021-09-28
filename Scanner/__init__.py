@@ -10,7 +10,7 @@ from kivymd.uix.datatables import MDDataTable
 
 from Scanner.features.ssh import socket_test
 from Scanner.features.sweeper import sweeper
-from Scanner.features.utility import format_df, list_in_caps
+from Scanner.features.utility import format_df, is_ip, list_in_caps
 
 
 class InitialScreen(Screen):
@@ -40,6 +40,9 @@ class SubnetInput(Screen):
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.back)
         return
+
+    def validate_ip(self, addr):
+        return is_ip(addr.text)
 
 
 class ScanOutput(Screen):
@@ -92,6 +95,9 @@ class SSHInput(Screen):
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.back)
         return
+
+    def validate_ip(self, addr):
+        return is_ip(str(addr))
 
 
 class SSHOutput(Screen):
