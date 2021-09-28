@@ -10,7 +10,7 @@ from kivymd.uix.datatables import MDDataTable
 
 from Scanner.features.ssh import socket_test
 from Scanner.features.sweeper import sweeper
-from Scanner.features.utility import format_df, is_ip, list_in_caps
+from Scanner.features.utility import format_df, is_ip, is_ip_cidr, list_in_caps
 
 
 class InitialScreen(Screen):
@@ -42,7 +42,8 @@ class SubnetInput(Screen):
         return
 
     def validate_ip(self, addr):
-        return is_ip(addr.text)
+        MDApp.get_running_app().IP_STATUS = is_ip_cidr(addr.text)
+        return
 
 
 class ScanOutput(Screen):
@@ -97,7 +98,8 @@ class SSHInput(Screen):
         return
 
     def validate_ip(self, addr):
-        return is_ip(str(addr))
+        MDApp.get_running_app().IP_STATUS = is_ip(addr.text)
+        return
 
 
 class SSHOutput(Screen):
@@ -112,9 +114,10 @@ class SSHOutput(Screen):
             return True
 
     def ssh_test(self):
-        self.ids.SSHresult.text = MDApp.get_running_app().SSH_STATUS = socket_test(
+        MDApp.get_running_app().SSH_STATUS = socket_test(
             MDApp.get_running_app().MY_IP, port=22
         )
+        self.ids.SSHresult.text = MDApp.get_running_app().SSH_STATUS
         return
 
     def on_pre_leave(self, *args):
@@ -131,6 +134,7 @@ class IpScanner(MDApp):
     MY_SUBNET = ""
     DF = None
     AUX = True
+    IP_STATUS = False
 
     def build(self):
         kv = Builder.load_file("./Scanner/design/Design.kv")

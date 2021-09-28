@@ -75,8 +75,9 @@ WindowManager:
             pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
             text: "Sweep"
             font_size: 20
-            on_release: 
-                app.root.current = "Scan Output"
+            on_release:
+                root.validate_ip(IpYielded)
+                if app.IP_STATUS: app.root.current = "Scan Output"
                 root.get_input([IpYielded])
                 root.clear_inputs([IpYielded])
 <ScanOutput>:
@@ -130,8 +131,9 @@ WindowManager:
             pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
             text: "SSH Test"
             font_size: 22
-            on_release: 
-                app.root.current = "SSH Output"
+            on_release:
+                root.validate_ip(SshIpYielded)
+                if app.IP_STATUS: app.root.current = "SSH Output"
                 root.get_input(SshIpYielded)
                 root.clear_inputs([SshIpYielded])
 <SSHOutput>:
