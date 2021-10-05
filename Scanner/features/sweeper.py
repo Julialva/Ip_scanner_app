@@ -13,14 +13,14 @@ class sweeper:
         sweep_result_final = self.__find_hostnames(sweep_result)
         return pd.DataFrame(sweep_result_final)
 
-    def __scan(self, ip):
-        arp_req_frame = scapy.ARP(pdst=ip)
+    def __scan(self, net_ip):
+        arp_req_frame = scapy.ARP(pdst=net_ip)
 
         broadcast_frame = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
 
         broadcast_arp_req_frame = broadcast_frame / arp_req_frame
 
-        answered_list = scapy.srp(broadcast_arp_req_frame, timeout=1, verbose=False)[0]
+        answered_list = scapy.srp(broadcast_arp_req_frame, timeout=2, verbose=False)[0]
         result = []
         for i in range(0, len(answered_list)):
             client_dict = {
