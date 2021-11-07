@@ -58,6 +58,7 @@ class ScanOutput(Screen):
 
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.back)
+        self.remove_widget(self.table)
         return
 
     def on_enter(self, *args):
@@ -65,13 +66,13 @@ class ScanOutput(Screen):
         columns_data, rows_data = format_df(MDApp.get_running_app().DF)
         columns_data = list_in_caps(columns_data)
         columns_data = [(x, dp(60)) for x in columns_data]
-        table = MDDataTable(
+        self.table = MDDataTable(
             column_data=columns_data,
             row_data=rows_data,
             use_pagination=True,
         )
         MDApp.get_running_app().AUX = False
-        self.add_widget(table)
+        self.add_widget(self.table)
 
 
 class SSHInput(Screen):
@@ -133,7 +134,6 @@ class IpScanner(MDApp):
     MY_IP = ""
     MY_SUBNET = ""
     DF = None
-    AUX = True
     IP_STATUS = False
 
     def build(self):

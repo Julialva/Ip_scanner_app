@@ -33,7 +33,6 @@ class sweeper:
 
     def __find_hostnames(self, sweep_result):
         for item in sweep_result:
-            # this could be better
             try:
                 item["hostname"] = socket.gethostbyaddr(item["ip"])
             except:

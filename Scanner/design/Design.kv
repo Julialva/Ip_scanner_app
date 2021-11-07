@@ -91,11 +91,6 @@ WindowManager:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
-    MDSpinner:
-        size_hint: None, None
-        size: dp(46), dp(46)
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        active: True if app.AUX else False
         
 <SSHInput>:
     canvas.before:
@@ -148,12 +143,7 @@ WindowManager:
         orientation: 'vertical'
         size_hint: 0.6, 0.7
         pos_hint: {'center_x': 0.5 , 'center_y': 0.5 }
-        MDSpinner:
-            size_hint: None, None
-            size: dp(46), dp(46)
-            pos_hint: {'center_x': .5, 'center_y': .5}
-            active: True
         Label:
             id: SSHresult
-            text: ""
+            text: "please wait..."
             font_size: 25  
